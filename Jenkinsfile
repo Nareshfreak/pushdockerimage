@@ -1,7 +1,7 @@
 pipeline {
   environment {
-    imagename = "yenigul/hacicenkins"
-    registryCredential = 'yenigul-dockerhub'
+    imagename = "nareshkatta/pushdockerimage"
+    registryCredential = 'Pushdockerimage'
     dockerImage = ''
   }
   agent any
@@ -28,6 +28,11 @@ pipeline {
 
           }
         }
+      }
+    }
+    stage('Test image') {
+      dockerImage.inside {
+        sh 'echo "Tests Passed" '
       }
     }
     stage('Remove Unused docker image') {
