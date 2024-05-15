@@ -31,8 +31,12 @@ pipeline {
       }
     }
     stage('Test image') {
+      steps{
+        script{
       dockerImage.inside {
         sh 'echo "Tests Passed" '
+      }
+    }
       }
     }
     stage('Remove Unused docker image') {
