@@ -19,7 +19,7 @@ pipeline {
       steps{
         script {
            docker.withRegistry( '', registryCredential ){
-          dockerImage = docker.build imagename
+          dockerImage = docker.build("${imagename}")
         }
       }
     }
