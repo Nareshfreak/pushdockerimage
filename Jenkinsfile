@@ -3,6 +3,9 @@ pipeline {
     imagename = "nareshkatta/pushdockerimage"
     registryCredential = 'Pushdockerimage'
     dockerImage = ''
+    RELEASE = "1.0.0"
+    IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
+    
   }
   agent any
   stages {
@@ -15,9 +18,11 @@ pipeline {
     stage('Building image') {
       steps{
         script {
+           docker.withRegistry( '', registryCredential ){
           dockerImage = docker.build imagename
         }
       }
+    }
     }
     stage('Deploy Image') {
       steps{
