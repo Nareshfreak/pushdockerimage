@@ -24,7 +24,12 @@ pipeline {
       }
     }
     }
-    stage('Deploy Image') {
+    stage('Trivy Scan'){
+      steps{
+        trivy "${imagename}"
+      }
+    }
+    stage('Push Docker  Image to Dockerhub') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
