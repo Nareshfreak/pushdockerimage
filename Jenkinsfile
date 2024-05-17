@@ -26,7 +26,7 @@ pipeline {
     }
     stage('Trivy Scan'){
       steps{
-        trivy image "${imagename}"
+        trivy image "${imagename}" > scan.txt
       }
     }
     stage('Push Docker  Image to Dockerhub') {
